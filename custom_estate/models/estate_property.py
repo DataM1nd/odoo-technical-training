@@ -1,7 +1,7 @@
 # Imports
 from odoo import fields, models
 
-# Create the new model
+# Create the model
 class EstateProperty(models.Model):
     # Define model metadata
     _name = 'estate.property'

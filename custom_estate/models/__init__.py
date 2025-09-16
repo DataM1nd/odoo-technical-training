@@ -1,2 +1,2 @@
 # Import all created models
-from . import estate_estate_property
+from . import estate_property
