@@ -28,6 +28,11 @@
         <field name="arch" type="xml">
             <form string="Property">
                 <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
                     <group>
                         <group>
                             <field name="postcode"/>
