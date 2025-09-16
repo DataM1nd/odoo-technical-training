@@ -1,10 +1,10 @@
 {
     "name": "Estate",  # The name that will appear in the App list
-    "version": "18.0.1.0.10",  # Version
+    "version": "18.0.1.0.11",  # Version
     "application": True,  # This line says the module is an App, and not a module
     "depends": ["base"],  # dependencies
     "data": [
-
+        "security/ir.model.access.csv"
     ],
     "installable": True,
     'license': 'LGPL-3',
