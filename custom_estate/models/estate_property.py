@@ -9,6 +9,7 @@ class EstateProperty(models.Model):
 
     # Define fields for the model
     name = fields.Char('Name', required=True)
+    active = fields.Boolean(default=True, required=True)
     description = fields.Text('Description')
     postcode = fields.Char('Postal Code')
     date_availability = fields.Date('Availbility Date', copy=False, default=fields.Date.add(fields.Date.today(), months=3))
