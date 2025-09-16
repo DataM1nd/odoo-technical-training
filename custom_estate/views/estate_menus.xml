@@ -2,10 +2,10 @@
 <odoo>
     <menuitem id="custom_estate_menu_root" name="Estate">
         <menuitem id="custom_estate_menu_top_advertisements" name="Advertisements">
-            <menuitem id="custom_estate_menu_action" action="custom_estate_estate_property_action"/>
+            <menuitem id="custom_estate_menu_sub_estate_property_action" action="custom_estate_estate_property_action"/>
         </menuitem>
         <menuitem id="custom_estate_menu_top_settings" name="Settings">
-            <menuitem id="custom_estate_menu_action" action="custom_estate_estate_property_type_action"/>
+            <menuitem id="custom_estate_menu_sub_estate_property_type_action" action="custom_estate_estate_property_type_action"/>
         </menuitem>
     </menuitem>
 </odoo>
