@@ -1,8 +1,9 @@
 {
-    "name": "Estate",  # The name that will appear in the App list
-    "version": "18.0.1.0.12",  # Version
-    "application": True,  # This line says the module is an App, and not a module
-    "depends": ["base"],  # dependencies
+    "name": "Estate",  # Name (app list)
+    "author": "DataMind (aka. Rune Van den Heuvel)",
+    "version": "18.0.1.0.13",  # Version
+    "application": True,  # Indicate the module is an application, not a module
+    "depends": ["base"],  # Define dependencies
     "data": [
         "security/ir.model.access.csv"
     ],
