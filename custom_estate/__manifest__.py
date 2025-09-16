@@ -1,7 +1,7 @@
 {
     'name': 'Estate',  # Name (app list)
-    'author': 'DataMind (aka. Rune Van den Heuvel)',
-    'version': '18.0.1.0.13',  # Version
+    'author': 'DataMind (aka. Rune Van den Heuvel)', # Author
+    'version': '18.0.1.0.14',  # Version
     'application': True,  # Indicate the module is an application, not a module
     'depends': ['base'],  # Define dependencies
     'data': [

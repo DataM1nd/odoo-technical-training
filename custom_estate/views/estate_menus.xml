@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<odoo>
+    <menuitem id="custom_estate_menu_root" name="Root Level">
+        <menuitem id="custom_estate_menu_first_level" name="First Level">
+            <menuitem id="custom_estate_menu_action" action="custom_estate_estate_property_action"/>
+        </menuitem>
+    </menuitem>
+</odoo>
