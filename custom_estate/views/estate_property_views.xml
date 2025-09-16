@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <odoo>
     <record id="custom_estate_estate_property_action" model="ir.actions.act_window">
         <field name="name">Test action</field>
