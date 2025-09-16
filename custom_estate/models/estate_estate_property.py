@@ -20,4 +20,4 @@ class EstateProperty(models.Model):
     garage = fields.Boolean('Has Garage?')
     garden = fields.Boolean('Has Garden?')
     garden_area = fields.Integer('Garden Surface')
-    garden_orientation = fields.Selection("Garden's Orientation", [('north', 'North'), ('south', 'Sout'), ('east', 'East'), ('west', 'West')])
+    garden_orientation = fields.Selection([('north', 'North'), ('south', 'Sout'), ('east', 'East'), ('west', 'West')])
