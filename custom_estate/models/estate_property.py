@@ -1,5 +1,6 @@
 # Imports
 from odoo import api, fields, models, exceptions
+from odoo.tools.float_utils import float_compare, float_is_zero
 
 # Create the model
 class EstateProperty(models.Model):
@@ -77,3 +78,12 @@ class EstateProperty(models.Model):
             else:
                 raise exceptions.UserError('Sold properties cannot be cancelled.')
         return True
+
+    # Check that the selling price is not lower than 90% of the expected price
+    @api.constrains('selling_price', 'expected_price')
+    def _check_selling_price(self):
+        for property in self:
+            # Only do something if the selling price is determined (it's 0 untill an offer is accepted)
+            if not float_is_zero(property.property.selling_price):
+                if float_compare(property.selling_price, property.expected_price * 0.9) == -1:
+                    raise exceptions.ValidationError('The selling price should be at least 90% of the expected price! You must reduce the expected price if you want to accept this offer.')
