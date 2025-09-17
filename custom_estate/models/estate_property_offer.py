@@ -6,6 +6,7 @@ class EstatePropertyOffer(models.Model):
     # Define model metadata
     _name = 'estate.property.offer'
     _description = 'Estate Property Offer'
+    _sql_constraints = [('check_strictly_positive_price', 'CHECK(price >= 0)', "The offer's price must be strictly positive.")]
 
     # Define fields for the model
     price = fields.Float()
