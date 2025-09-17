@@ -84,6 +84,6 @@ class EstateProperty(models.Model):
     def _check_selling_price(self):
         for property in self:
             # Only do something if the selling price is determined (it's 0 untill an offer is accepted)
-            if not float_is_zero(property.selling_price):
-                if float_compare(property.selling_price, property.expected_price * 0.9) == -1:
+            if not float_is_zero(property.selling_price, 2):
+                if float_compare(property.selling_price, property.expected_price * 0.9, 2) == -1:
                     raise exceptions.ValidationError('The selling price should be at least 90% of the expected price! You must reduce the expected price if you want to accept this offer.')
