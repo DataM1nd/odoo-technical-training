@@ -38,8 +38,8 @@ class EstateProperty(models.Model):
     # Method for calculating the total area
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
-        for record in self: # Loop through every record where one of the dependent fields changed
-            record.total_area = record.living_area + record.garden_area
+        for property in self: # Loop through every record where one of the dependent fields changed
+            property.total_area = property.living_area + property.garden_area
 
     # Method for calculating the best price
     @api.depends('offer_ids.price')
@@ -49,8 +49,8 @@ class EstateProperty(models.Model):
         #for record in records_with_offer:
         #    record.best_price = max(record.offer_ids.mapped('price'))
         #(self - records_with_offer).best_price = 0 # For all the other records, put the amount to 0
-        for record in self:
-            record.best_price = max([0, *record.offer_ids.mapped('price')])
+        for property in self:
+            property.best_price = max([0, *property.offer_ids.mapped('price')])
 
     # Automatically fill in/remove data when the garden field is (un)checked
     @api.onchange('garden')
@@ -60,20 +60,20 @@ class EstateProperty(models.Model):
 
     # Function for the button to mark a property as sold
     def action_mark_estate_property_as_sold(self):
-        for record in self:
+        for property in self:
             # Make sure the property is not already cancelled
-            if record.state != 'cancelled':
-                record.state = 'sold'
+            if property.state != 'cancelled':
+                property.state = 'sold'
             else:
                 raise exceptions.UserError('Cancelled properties cannot be sold.')
         return True # We always have to return something in a public function
 
     # Function for the button to mark a property as sold
     def action_mark_estate_property_as_cancelled(self):
-        for record in self:
+        for property in self:
             # Make sure the property is not already sold
-            if record.state != 'sold':
-                record.state = 'cancelled'
+            if property.state != 'sold':
+                property.state = 'cancelled'
             else:
                 raise exceptions.UserError('Sold properties cannot be cancelled.')
         return True

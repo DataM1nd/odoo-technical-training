@@ -19,30 +19,30 @@ class EstatePropertyOffer(models.Model):
     # Method for calculating the deadline when the validity field is changed
     @api.depends('validity')
     def _compute_date_deadline(self):
-        for record in self:
-            record.date_deadline = fields.Date.add(record.create_date or fields.Date.today(), days=record.validity)
+        for offer in self:
+            offer.date_deadline = fields.Date.add(offer.create_date or fields.Date.today(), days=offer.validity)
 
     # Method for calculating the validity when the date_deadline field is changed
     def _inverse_date_deadline(self):
-        for record in self:
-            record.validity = (record.date_deadline - fields.Date.to_date(record.create_date)).days
+        for offer in self:
+            offer.validity = (offer.date_deadline - fields.Date.to_date(offer.create_date)).days
 
     # Button function to accept an offer
     def action_accept_estate_property_offer(self):
-        for record in self:
+        for offer in self:
             # Only do something if the current offer is not already accepted
-            if not record.status == 'accepted':
+            if not offer.status == 'accepted':
                 # Make sure there is not already an accepted offer
-                if not record.property_id.offer_ids.filtered_domain([('status', '=', 'accepted')]):
-                    record.status = 'accepted'
-                    record.property_id.partner_id = record.partner_id
-                    record.property_id.selling_price = record.price
+                if not offer.property_id.offer_ids.filtered_domain([('status', '=', 'accepted')]):
+                    offer.status = 'accepted'
+                    offer.property_id.partner_id = offer.partner_id
+                    offer.property_id.selling_price = offer.price
                 else:
                     raise exceptions.UserError('Another offer was already accepted for this property.')
         return True
 
     # Button function to refuse an offer
     def action_refuse_estate_property_offer(self):
-        for record in self:
-            record.status = 'refused'
+        for offer in self:
+            offer.status = 'refused'
         return True
