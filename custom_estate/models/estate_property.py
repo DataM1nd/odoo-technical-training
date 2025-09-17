@@ -1,5 +1,5 @@
 # Imports
-from odoo import api, fields, models
+from odoo import api, fields, models, exceptions
 
 # Create the model
 class EstateProperty(models.Model):
@@ -53,3 +53,23 @@ class EstateProperty(models.Model):
     def _onchange_garden(self):
         self.garden_area = 0 if not self.garden else 10
         self.garden_orientation = '' if not self.garden else 'north'
+
+    # Function for the button to mark a property as sold
+    def action_mark_estate_property_as_sold(self):
+        for record in self:
+            # Make sure the property is not already cancelled
+            if record.state != 'cancelled':
+                record.state = 'sold'
+            else:
+                raise exceptions.UserError('Cancelled properties cannot be sold.')
+        return True # We always have to return something in a public function
+
+    # Function for the button to mark a property as sold
+    def action_mark_estate_property_as_cancelled(self):
+        for record in self:
+            # Make sure the property is not already sold
+            if record.state != 'sold':
+                record.state = 'cancelled'
+            else:
+                raise exceptions.UserError('Sold properties cannot be cancelled.')
+        return True
