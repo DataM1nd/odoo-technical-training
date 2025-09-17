@@ -1,9 +1,9 @@
 {
-    'name': 'Estate Account',  # Name (app list)
-    'author': 'DataMind (aka. Rune Van den Heuvel)', # Author
-    'version': '18.0.0.0.0',  # Version
-    'application': False,  # Indicate the module is an application, not a module
-    'depends': ['estate', 'account'],  # Define dependencies
+    'name': 'Estate Account',
+    'author': 'DataMind (aka. Rune Van den Heuvel)',
+    'version': '18.0.0.0.0',
+    'application': False,
+    'depends': ['custom_estate', 'account'],
     'data': [],
     'installable': True,
     'license': 'LGPL-3',
