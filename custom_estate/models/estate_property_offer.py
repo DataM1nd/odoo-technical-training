@@ -24,7 +24,7 @@ class EstatePropertyOffer(models.Model):
     # Method for calculating the validity when the date_deadline field is changed
     def _inverse_date_deadline(self):
         for record in self:
-            record.validity = record.date_deadline.day - record.create_date.day
+            record.validity = (record.date_deadline - fields.Date.to_date(record.create_date)).days
 
     # Button function to accept an offer
     def action_accept_estate_property_offer(self):
