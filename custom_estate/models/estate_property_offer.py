@@ -46,3 +46,13 @@ class EstatePropertyOffer(models.Model):
         for offer in self:
             offer.status = 'refused'
         return True
+
+    # Override the create function to update the state of the property when an offer is created
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            property = self.env['estate.property'].browse(vals['property_id'])
+            if property.offer_ids.filtered_domain([('price', '>', vals['price'])]):
+                raise exceptions.UserError('You cannot create a lower offer than the ones already existing.')
+            else:
+                property.state = 'offer_received'

@@ -87,3 +87,9 @@ class EstateProperty(models.Model):
             if not float_is_zero(property.selling_price, 2):
                 if float_compare(property.selling_price, property.expected_price * 0.9, 2) == -1:
                     raise exceptions.ValidationError('The selling price should be at least 90% of the expected price! You must reduce the expected price if you want to accept this offer.')
+
+    # Prevent deletion if the state is not 'new' or 'cancelled'
+    @api.ondelete()
+    def _prevent_property_deletion_based_on_state(self):
+        if self.filtered_domain([('state', 'in', ['new', 'cancelled'])]):
+            raise exceptions.UserError('Only new and cancelled properties can be deleted.')
