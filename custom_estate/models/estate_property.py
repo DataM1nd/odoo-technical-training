@@ -34,11 +34,16 @@ class EstateProperty(models.Model):
     # Method for calculating the total area
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
-        for record in self: # Loop through every record where one of the depended fields changed
+        for record in self: # Loop through every record where one of the dependent fields changed
             record.total_area = record.living_area + record.garden_area
 
     # Method for calculating the best price
     @api.depends('offer_ids.price')
     def _compute_best_price(self):
+        # Alternative
+        #records_with_offer = self.filtered('offer_ids.price') # Create a list with only the records containing a offer_ids.price
+        #for record in records_with_offer:
+        #    record.best_price = max(record.offer_ids.mapped('price'))
+        #(self - records_with_offer).best_price = 0 # For all the other records, put the amount to 0
         for record in self:
-            record.best_price = max(record.offer_ids.mapped('price'))
+            record.best_price = max([0, *record.offer_ids.mapped('price')])
