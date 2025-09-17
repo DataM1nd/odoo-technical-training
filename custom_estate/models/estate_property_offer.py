@@ -29,13 +29,15 @@ class EstatePropertyOffer(models.Model):
     # Button function to accept an offer
     def action_accept_estate_property_offer(self):
         for record in self:
-            # Make sure there is not already an accepted offer
-            if not record.property_id.offer_ids.filtered_domain([('status', '=', 'accepted')]):
-                record.status = 'accepted'
-                record.property_id.partner_id = record.partner_id
-                record.property_id.selling_price = record.price
-            else:
-                raise exceptions.UserError('Another offer was already accepted for this property.')
+            # Only do something if the current offer is not already accepted
+            if not record.status == 'accepted':
+                # Make sure there is not already an accepted offer
+                if not record.property_id.offer_ids.filtered_domain([('status', '=', 'accepted')]):
+                    record.status = 'accepted'
+                    record.property_id.partner_id = record.partner_id
+                    record.property_id.selling_price = record.price
+                else:
+                    raise exceptions.UserError('Another offer was already accepted for this property.')
         return True
 
     # Button function to refuse an offer
