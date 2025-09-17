@@ -89,7 +89,7 @@ class EstateProperty(models.Model):
                     raise exceptions.ValidationError('The selling price should be at least 90% of the expected price! You must reduce the expected price if you want to accept this offer.')
 
     # Prevent deletion if the state is not 'new' or 'cancelled'
-    @api.ondelete()
+    @api.ondelete(at_uninstall=False)
     def _prevent_property_deletion_based_on_state(self):
         if self.filtered_domain([('state', 'in', ['new', 'cancelled'])]):
             raise exceptions.UserError('Only new and cancelled properties can be deleted.')
