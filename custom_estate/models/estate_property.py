@@ -47,3 +47,9 @@ class EstateProperty(models.Model):
         #(self - records_with_offer).best_price = 0 # For all the other records, put the amount to 0
         for record in self:
             record.best_price = max([0, *record.offer_ids.mapped('price')])
+
+    # Automatically fill in/remove data when the garden field is (un)checked
+    @api.onchange('garden')
+    def _onchange_garden(self):
+        self.garden_area = 0 if not self.garden else 10
+        self.garden_orientation = '' if not self.garden else 'north'
