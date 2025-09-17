@@ -56,3 +56,4 @@ class EstatePropertyOffer(models.Model):
                 raise exceptions.UserError('You cannot create a lower offer than the ones already existing.')
             else:
                 property.state = 'offer_received'
+        return super().create(vals_list)
