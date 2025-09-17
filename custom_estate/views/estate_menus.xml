@@ -1,9 +1,13 @@
 <?xml version="1.0"?>
 <odoo>
+    <!-- Root menu (app selector) -->
     <menuitem id="custom_estate_menu_root" name="Estate">
+        <!-- Top menu: advertisements -->
         <menuitem id="custom_estate_menu_top_advertisements" name="Advertisements">
             <menuitem id="custom_estate_menu_sub_estate_property_action" action="custom_estate_estate_property_action"/>
         </menuitem>
+
+        <!-- Top menu: settings -->
         <menuitem id="custom_estate_menu_top_settings" name="Settings">
             <menuitem id="custom_estate_menu_sub_estate_property_type_action" action="custom_estate_estate_property_type_action"/>
             <menuitem id="custom_estate_menu_sub_estate_property_tag_action" action="custom_estate_estate_property_tag_action"/>
