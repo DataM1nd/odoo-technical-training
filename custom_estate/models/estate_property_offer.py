@@ -54,6 +54,5 @@ class EstatePropertyOffer(models.Model):
             property = self.env['estate.property'].browse(vals['property_id'])
             if property.offer_ids.filtered_domain([('price', '>', vals['price'])]):
                 raise exceptions.UserError('You cannot create a lower offer than the ones already existing.')
-            else:
-                property.state = 'offer_received'
+            property.state = 'offer_received'
         return super().create(vals_list)

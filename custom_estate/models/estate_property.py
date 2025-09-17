@@ -91,5 +91,5 @@ class EstateProperty(models.Model):
     # Prevent deletion if the state is not 'new' or 'cancelled'
     @api.ondelete(at_uninstall=False)
     def _prevent_property_deletion_based_on_state(self):
-        if self.filtered_domain([('state', 'in', ['new', 'cancelled'])]):
+        if self.filtered_domain([('state', 'not in', ['new', 'cancelled'])]):
             raise exceptions.UserError('Only new and cancelled properties can be deleted.')
